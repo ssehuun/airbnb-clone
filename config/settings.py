@@ -30,7 +30,8 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
-INSTALLED_APPS = [
+# 원래 있던 앱 (DJANGO_APPS 명명)
+DJANGO_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -38,6 +39,13 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
 ]
+
+# 직접 설치한 앱 (PROJECT_APPS 명명)
+PROJECT_APPS = [
+    "users.apps.UsersConfig",
+]
+# 관리하기 편하게 위 2개로 나눔
+INSTALLED_APPS = DJANGO_APPS + PROJECT_APPS
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -118,3 +126,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = "/static/"
+
+# users 앱 customize 하기위해 추가 (Substituting a custom User model)
+# https://docs.djangoproject.com/en/3.1/topics/auth/customizing/
+AUTH_USER_MODEL = "users.User"  # "app.ModelName"
