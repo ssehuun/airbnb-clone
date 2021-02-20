@@ -44,7 +44,9 @@ THIRD_PARTY_APPS = []
 
 # 직접 설치한 앱 (PROJECT_APPS 명명)
 PROJECT_APPS = [
+    "core.apps.CoreConfig",
     "users.apps.UsersConfig",
+    "rooms.apps.RoomsConfig",
 ]
 # 관리하기 편하게 위 2개로 나눔
 INSTALLED_APPS = DJANGO_APPS + PROJECT_APPS
