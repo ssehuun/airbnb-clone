@@ -40,7 +40,7 @@ DJANGO_APPS = [
     "django.contrib.staticfiles",
 ]
 
-THIRD_PARTY_APPS = []
+THIRD_PARTY_APPS = ["django-countries"]
 
 # 직접 설치한 앱 (PROJECT_APPS 명명)
 PROJECT_APPS = [
