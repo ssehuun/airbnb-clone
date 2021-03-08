@@ -56,6 +56,7 @@ class RoomAdmin(admin.ModelAdmin):
         "instant_book",
         "count_amenities",  # ManyToManyField는 함수로
         "count_photos",
+        "total_rating",
     )
 
     ordering = ("name", "price", "bedrooms")
