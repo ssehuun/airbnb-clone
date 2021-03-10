@@ -19,4 +19,5 @@ class ReservationAdmin(admin.ModelAdmin):
 
     list_filter = (
         "status",
+        # how can I filter with in_progress or is_finished?
     )
