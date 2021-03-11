@@ -15,7 +15,6 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
@@ -138,3 +137,5 @@ STATIC_URL = "/static/"
 # users 앱 customize 하기위해 추가 (Substituting a custom User model)
 # https://docs.djangoproject.com/en/3.1/topics/auth/customizing/
 AUTH_USER_MODEL = "users.User"  # "app.ModelName"
+
+MEDIA_ROOT = os.path.join(BASE_DIR, "uploads")

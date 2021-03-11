@@ -25,7 +25,7 @@ class User(AbstractUser):
 
     CURRENCY_CHOICE = ((CURRENCY_USD, "USD"), (CURRENCY_KRW, "KRW"))
 
-    avatar = models.ImageField(blank=True)  # null은 데이터베이스에 저장될때 사용, blank는 폼에 적용될때 사용
+    avatar = models.ImageField(upload_to="avatars", blank=True)  # null은 데이터베이스에 저장될때 사용, blank는 폼에 적용될때 사용
     gender = models.CharField(choices=GENDER_CHOICES, max_length=10, blank=True)
     bio = models.TextField(default="", blank=True)  # bio data field를 admin에 추가시킴
     birthdate = models.DateField(blank=True, null=True)
