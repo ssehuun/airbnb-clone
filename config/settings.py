@@ -22,7 +22,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = "m9r&^5=blm%%e1_l5(l%fj*7&=o%1&7c5@8edwh4c@fj5!feq3"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = True # whether it is develope mode or live mode (yellow page)
 
 ALLOWED_HOSTS = []
 
@@ -139,3 +139,5 @@ STATIC_URL = "/static/"
 AUTH_USER_MODEL = "users.User"  # "app.ModelName"
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "uploads")
+
+MEDIA_URL = "/media/"
