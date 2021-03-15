@@ -1,11 +1,16 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from . import models  # admin.py와 같은 위치에 있는 모델을 불러옴
+from rooms import models as room_models
 
-# Register your models here.
+class RoomInline(admin.TabularInline):
+    model = room_models.Room
+
 @admin.register(models.User)
 class CustomUserAdmin(UserAdmin):
     """ Custom User Admin """
+
+    inlines = (RoomInline,)
 
     # list_display = ("username", "gender", "language", "currency", "superhost")
     # list_filter = ("language", "currency", "superhost")
