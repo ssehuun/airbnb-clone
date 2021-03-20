@@ -12,8 +12,10 @@ class ItemAdmin(admin.ModelAdmin):
     def used_by(self, obj):
         return obj.rooms.count()
 
+
 class PhotoInline(admin.TabularInline):
     model = models.Photo
+
 
 @admin.register(models.Room)
 class RoomAdmin(admin.ModelAdmin):
@@ -24,7 +26,7 @@ class RoomAdmin(admin.ModelAdmin):
     fieldsets = (
         (
             "Basic Info",
-            {"fields": ("name", "description", "country", "address", "price")},
+            {"fields": ("name", "description", "country", "city", "address", "price")},
         ),
         (
             "Times",
@@ -77,7 +79,7 @@ class RoomAdmin(admin.ModelAdmin):
         "city",
     )
 
-    raw_id_fields = ("host",) # Use raw_id instead of select style when many items
+    raw_id_fields = ("host",)  # Use raw_id instead of select style when many items
 
     search_fields = ("=city", "^host__username")
 
@@ -86,6 +88,10 @@ class RoomAdmin(admin.ModelAdmin):
         "facilities",
         "house_rules",
     )
+
+    def save_model(self, request, obj, form, change):
+        print(self, request)
+        super().save_model(request, obj, form, change)
 
     def count_amenities(self, obj):  # admin의 칼럽 생성
         print(obj)
@@ -106,4 +112,5 @@ class PhotoAdmin(admin.ModelAdmin):
     def get_thumbnail(self, obj):
         print(dir(obj.file))
         return mark_safe(f"<img width='50px' src='{obj.file.url}' />")
+
     get_thumbnail.short_description = "Thumbnail"
