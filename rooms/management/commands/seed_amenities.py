@@ -3,11 +3,12 @@ from rooms.models import Amenity
 
 
 class Command(BaseCommand):
-    # def add_arguments(self, parser):
-    #     parser.add_argument(
-    #         "--times",
-    #         help="How many time do you want me to tell you that I love u",
-    #     )
+    help = "This command creates amenities"
+
+    """ def add_arguments(self, parser):
+        parser.add_argument(
+            "--times",
+        )"""
 
     def handle(self, *args, **options):
         amenities = [
