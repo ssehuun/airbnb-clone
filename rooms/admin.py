@@ -112,6 +112,8 @@ class RoomAdmin(admin.ModelAdmin):
     def count_photos(self, obj):  # obj는 models의 Room class 인스턴스
         return obj.photos
 
+    count_photos.short_description = "Photo count"
+
 
 @admin.register(models.Photo)
 class PhotoAdmin(admin.ModelAdmin):
