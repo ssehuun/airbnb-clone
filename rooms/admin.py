@@ -105,12 +105,12 @@ class RoomAdmin(admin.ModelAdmin):
 
     def count_amenities(self, obj):  # admin의 칼럽 생성
         print(obj)
-        return obj.amenities
+        return obj.amenities.count()
 
-    # count_amenities.short_description = "super sexy!"
+    count_amenities.short_description = "Amenity Count"
 
     def count_photos(self, obj):  # obj는 models의 Room class 인스턴스
-        return obj.photos
+        return obj.photos.count()
 
     count_photos.short_description = "Photo count"
 
