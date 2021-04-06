@@ -25,10 +25,14 @@ class User(AbstractUser):
 
     CURRENCY_CHOICE = ((CURRENCY_USD, "USD"), (CURRENCY_KRW, "KRW"))
 
-    avatar = models.ImageField(upload_to="avatars", blank=True)  # null은 데이터베이스에 저장될때 사용, blank는 폼에 적용될때 사용
+    avatar = models.ImageField(
+        upload_to="avatars", blank=True
+    )  # null은 데이터베이스에 저장될때 사용, blank는 폼에 적용될때 사용
     gender = models.CharField(choices=GENDER_CHOICES, max_length=10, blank=True)
     bio = models.TextField(default="", blank=True)  # bio data field를 admin에 추가시킴
     birthdate = models.DateField(blank=True, null=True)
     language = models.CharField(choices=LANGUAGE_CHOICES, max_length=2, blank=True)
     currency = models.CharField(choices=CURRENCY_CHOICE, max_length=3, blank=True)
     superhost = models.BooleanField(default=False)
+
+    # user admin 페이지에서 get_absolute_url 함수 만들어보자
