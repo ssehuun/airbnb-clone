@@ -1,5 +1,5 @@
 from django.utils import timezone
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 from django.http import Http404
 from django.urls import reverse
 from django.shortcuts import render, redirect
@@ -21,11 +21,8 @@ class HomeView(ListView):
         return context
 
 
-def room_detail(request, pk):
-    # print(pk)
-    try:
-        room = models.Room.objects.get(pk=pk)
-        return render(request, "rooms/detail.html", {"room": room})
-    except models.Room.DoesNotExist:
-        # return redirect(reverse("core:home")) 리다이렉트 하거나 404페이지 띄우거나
-        raise Http404()
+class RoomDetail(DetailView):
+    """ DetailView Definition """
+
+    model = models.Room
+    pk_url_kwarg = "potato"  # url에서 pk로 던져주는 키워드를 potato를 바꿔도 됨(url.py에서 potato 변경요)
