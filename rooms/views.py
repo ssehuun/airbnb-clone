@@ -26,3 +26,9 @@ class RoomDetail(DetailView):
 
     model = models.Room
     pk_url_kwarg = "potato"  # url에서 pk로 던져주는 키워드를 potato를 바꿔도 됨(url.py에서 potato 변경요)
+
+
+def search(request):
+    city = request.GET.get("city")
+    city = str.capitalize(city)
+    return render(request, "rooms/search.html", {"city": city})
