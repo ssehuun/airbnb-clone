@@ -30,9 +30,14 @@ class RoomDetail(DetailView):
 
 
 def search(request):
-    print(request.GET)
+    # print(request.GET)
     city = request.GET.get("city", "Anywhere")
     city = str.capitalize(city)
+    country = request.GET.get("country", "KR")
+    room_type = int(request.GET.get("room_type", 0))
     room_types = models.RoomType.objects.all()
-    print(room_types)
-    return render(request, "rooms/search.html", {"city": city, "countries":countries, "room_types":room_types})
+
+    # s_room_type 는 front에서 select된걸 말함(선택후 검색시 그대로 보여주기 위해 생성)
+    form = {"city": city, "s_room_type": room_type, "s_country": country}
+    choices = {"countries": countries, "room_types": room_types}
+    return render(request, "rooms/search.html", {**form, **choices})
