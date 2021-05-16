@@ -40,8 +40,10 @@ def search(request):
     bedrooms = int(request.GET.get("bedrooms", 0))
     beds = int(request.GET.get("beds", 0))
     baths = int(request.GET.get("baths", 0))
-    s_amenities = request.GET.get("amenities")
-    s_facilities = request.GET.get("facilities")
+    instant = request.GET.get("instant", False)
+    super_host = request.GET.get("super_host", False)
+    s_amenities = request.GET.getlist("amenities")
+    s_facilities = request.GET.getlist("facilities")
     print(s_amenities, s_facilities)
 
     # s_room_type 는 front에서 select된걸 말함(선택후 검색시 그대로 보여주기 위해 생성)
@@ -54,6 +56,10 @@ def search(request):
         "bedrooms": bedrooms,
         "beds": beds,
         "baths": baths,
+        "instant": instant,
+        "super_host": super_host,
+        "s_amenities": s_amenities,
+        "s_facilities": s_facilities,
     }
     room_types = models.RoomType.objects.all()
     amenities = models.Amenity.objects.all()
