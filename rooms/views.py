@@ -40,8 +40,8 @@ def search(request):
     bedrooms = int(request.GET.get("bedrooms", 0))
     beds = int(request.GET.get("beds", 0))
     baths = int(request.GET.get("baths", 0))
-    instant = request.GET.get("instant", False)
-    super_host = request.GET.get("super_host", False)
+    instant = bool(request.GET.get("instant", False))
+    superhost = bool(request.GET.get("super_host", False))
     s_amenities = request.GET.getlist("amenities")
     s_facilities = request.GET.getlist("facilities")
     # print(s_amenities, s_facilities) 유저가 선택한것 확인하기 위함
@@ -57,7 +57,7 @@ def search(request):
         "beds": beds,
         "baths": baths,
         "instant": instant,
-        "super_host": super_host,
+        "superhost": superhost,
         "s_amenities": s_amenities,
         "s_facilities": s_facilities,
     }
@@ -72,6 +72,7 @@ def search(request):
         "facilities": facilities,
     }
 
+    ### 검색하기 위한 필터 생성
     filter_args = {}
 
     if city != "Anywhere":
@@ -82,6 +83,36 @@ def search(request):
     if room_type != 0:
         filter_args["room_type__pk"] = room_type  # foreign key인 room_type안에서 pk로 필터링
 
+    if price != 0:
+        filter_args["price_lte"] = price  # less than or equal
+
+    if guests != 0:
+        filter_args["guests_gte"] = guests  # greater than or equal
+
+    if bedrooms != 0:
+        filter_args["bedrooms_gte"] = bedrooms
+
+    if beds != 0:
+        filter_args["beds_gte"] = beds
+
+    if baths != 0:
+        filter_args["baths_gte"] = baths
+
+    if instant is True:
+        filter_args["instant_book"] = True
+
+    if superhost is True:
+        filter_args["host__superhost"] = True
+
+    if len(s_amenities) > 0:
+        for s_amenity in s_amenities:
+            filter_args["amenities__pk"] = int(s_amenity)
+
+    if len(s_facilities) > 0:
+        for s_facility in s_facilities:
+            filter_args["facilities__pk"] = int(s_facility)
+
     rooms = models.Room.objects.filter(**filter_args)
-    # print(rooms)
+    print(rooms)
+    ### end 검색하기 위한 필터 생성
     return render(request, "rooms/search.html", {**form, **choices, "rooms": rooms})
