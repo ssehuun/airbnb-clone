@@ -44,7 +44,7 @@ def search(request):
     super_host = request.GET.get("super_host", False)
     s_amenities = request.GET.getlist("amenities")
     s_facilities = request.GET.getlist("facilities")
-    print(s_amenities, s_facilities)
+    # print(s_amenities, s_facilities) 유저가 선택한것 확인하기 위함
 
     # s_room_type 는 front에서 select된걸 말함(선택후 검색시 그대로 보여주기 위해 생성)
     form = {
@@ -71,4 +71,17 @@ def search(request):
         "amenities": amenities,
         "facilities": facilities,
     }
-    return render(request, "rooms/search.html", {**form, **choices})
+
+    filter_args = {}
+
+    if city != "Anywhere":
+        filter_args["city__startswith"] = city
+
+    filter_args["country"] = country
+
+    if room_type != 0:
+        filter_args["room_type__pk"] = room_type  # foreign key인 room_type안에서 pk로 필터링
+
+    rooms = models.Room.objects.filter(**filter_args)
+    # print(rooms)
+    return render(request, "rooms/search.html", {**form, **choices, "rooms": rooms})
