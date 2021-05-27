@@ -24,3 +24,14 @@ class LoginView(FormView):
 def log_out(request):
     logout(request)
     return redirect(reverse("core:home"))
+
+class SignUpView(FormView):
+    template_name = "users/signup.html"
+    form_class = forms.SignUpForm
+    success_url = reverse_lazy("core:home")  # 바로 실행하지 않는다는 의미 reverse_lazy
+    initial = {
+        "first_name": "sehun",
+        "last_name": "jung",
+        "email": "hun@naver.com",
+    }
+    
