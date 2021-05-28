@@ -31,8 +31,12 @@ class User(AbstractUser):
     gender = models.CharField(choices=GENDER_CHOICES, max_length=10, blank=True)
     bio = models.TextField(default="", blank=True)  # bio data field를 admin에 추가시킴
     birthdate = models.DateField(blank=True, null=True)
-    language = models.CharField(choices=LANGUAGE_CHOICES, max_length=2, blank=True)
-    currency = models.CharField(choices=CURRENCY_CHOICE, max_length=3, blank=True)
+    language = models.CharField(
+        choices=LANGUAGE_CHOICES, max_length=2, blank=True, default=CURRENCY_KRW
+    )
+    currency = models.CharField(
+        choices=CURRENCY_CHOICE, max_length=3, blank=True, default=LANGUAGE_KOREAN
+    )
     superhost = models.BooleanField(default=False)
 
     # user admin 페이지에서 get_absolute_url 함수 만들어보자

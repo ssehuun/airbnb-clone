@@ -25,6 +25,7 @@ def log_out(request):
     logout(request)
     return redirect(reverse("core:home"))
 
+
 class SignUpView(FormView):
     template_name = "users/signup.html"
     form_class = forms.SignUpForm
@@ -34,6 +35,7 @@ class SignUpView(FormView):
         "last_name": "jung",
         "email": "hun@naver.com",
     }
+
     def form_valid(self, form):  # FormView의 메소드
         form.save()
         email = form.cleaned_data.get("email")
