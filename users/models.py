@@ -32,10 +32,10 @@ class User(AbstractUser):
     bio = models.TextField(default="", blank=True)  # bio data field를 admin에 추가시킴
     birthdate = models.DateField(blank=True, null=True)
     language = models.CharField(
-        choices=LANGUAGE_CHOICES, max_length=2, blank=True, default=CURRENCY_KRW
+        choices=LANGUAGE_CHOICES, max_length=2, blank=True, default=LANGUAGE_KOREAN
     )
     currency = models.CharField(
-        choices=CURRENCY_CHOICE, max_length=3, blank=True, default=LANGUAGE_KOREAN
+        choices=CURRENCY_CHOICE, max_length=3, blank=True, default=CURRENCY_KRW
     )
     superhost = models.BooleanField(default=False)
 
