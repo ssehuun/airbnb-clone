@@ -1,5 +1,8 @@
+import uuid
+from django.conf import settings
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from django.core.mail import send_mail
 
 
 class User(AbstractUser):
@@ -45,8 +48,18 @@ class User(AbstractUser):
     user가 가입을 하면 email_secret에 랜덤 숫자를 넣어서 링크를 통해 user 이메일에 보낸다.
     user가 클릭하면 /verify/랜덤숫자 로 이동하고, 서버에서는 랜덤숫자를 가지고 있는 user를 찾으면 인증 완료 """
 
-    email_confirmed = models.BooleanField(default=False)
-    email_secret = models.CharField(max_length=120, default="", blank=True)
+    email_verified = models.BooleanField(default=False)
+    email_secret = models.CharField(max_length=20, default="", blank=True)
 
     def verify_email(self):
-        pass
+        if self.email_verified is False:
+            secret = uuid.uuid4().hex[:20]
+            self.email_secret = secret
+            send_mail(
+                "Verify Airbnb Account",
+                f"Verify account: {secret}",
+                settings.EMAIL_FROM,
+                [self.email],
+                fail_silently=False,
+            )
+        return
