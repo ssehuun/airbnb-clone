@@ -40,3 +40,13 @@ class User(AbstractUser):
     superhost = models.BooleanField(default=False)
 
     # user admin 페이지에서 get_absolute_url 함수 만들어보자
+
+    """ email 인증을 하기 위함
+    user가 가입을 하면 email_secret에 랜덤 숫자를 넣어서 링크를 통해 user 이메일에 보낸다.
+    user가 클릭하면 /verify/랜덤숫자 로 이동하고, 서버에서는 랜덤숫자를 가지고 있는 user를 찾으면 인증 완료 """
+
+    email_confirmed = models.BooleanField(default=False)
+    email_secret = models.CharField(max_length=120, default="", blank=True)
+
+    def verify_email(self):
+        pass

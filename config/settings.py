@@ -146,5 +146,5 @@ MEDIA_URL = "/media/"
 
 EMAIL_HOST = "smtp.mailgun.org"
 EMAIL_PORT = "587"
-EMAIL_HOST_USER = "brad@sandbox4543bb1759864eb99361aa43ff30b97d.mailgun.org"
-EMAIL_HOST_PASSWORD = ""
+EMAIL_HOST_USER = os.environ.get("MAILGUN_USERNAME")  # 보안상 .env 파일에서 불러옴
+EMAIL_HOST_PASSWORD = os.environ.get("MAILGUN_PASSWORD")
