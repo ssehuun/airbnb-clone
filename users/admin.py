@@ -3,8 +3,10 @@ from django.contrib.auth.admin import UserAdmin
 from . import models  # admin.py와 같은 위치에 있는 모델을 불러옴
 from rooms import models as room_models
 
+
 class RoomInline(admin.TabularInline):
     model = room_models.Room
+
 
 @admin.register(models.User)
 class CustomUserAdmin(UserAdmin):
@@ -43,5 +45,7 @@ class CustomUserAdmin(UserAdmin):
         "superhost",
         "is_staff",
         "is_superuser",
+        "email_verified",
+        "email_secret",
     )
     list_filter = UserAdmin.list_filter + ("superhost",)
